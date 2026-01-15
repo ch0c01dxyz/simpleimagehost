@@ -1,0 +1,4 @@
+[00:00:06.922] Server  LOG     ✓ Ready in 4.3s
+[00:00:30.654] Server  ERROR   ⨯ TypeError: Content-Type was not one of "multipart/form-data" or "application/x-www-form-urlencoded".
+[00:00:46.896] Server  ERROR   ⨯ TypeError: Content-Type was not one of "multipart/form-data" or "application/x-www-form-urlencoded".
+[00:01:25.388] Server  ERROR   ⨯ Error: Vercel Blob: No token found. Either configure the `BLOB_READ_WRITE_TOKEN` environment variable, or pass a `token` option to your calls.
