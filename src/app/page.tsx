@@ -1,5 +1,4 @@
 import { DiscordEmbedViewer } from '@/components/discord-embed-viewer'
-import { redirect } from 'next/navigation'
 import { settings } from '../../settings';
 import Link from 'next/link';
 import { replace_dynamic_variables } from "@/lib/utils";
@@ -12,16 +11,13 @@ const FAKE_PLACEHOLDER_FILE_DATA = {
 }
 
 export default async function Home() {
-	if (process.env.NODE_ENV === 'production') {
-		return redirect(settings.page_redirect);
-	}
-
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center p-4">
-			<h1>Welcome to simple image host! This is how your embed will look like.</h1>
-			<p className='text-sm text-muted-foreground mb-5'>This page is only available in development mode. Made with ❤️ by <Link href="https://github.com/ch0c01dxyz" className='text-blue-400' target='_blank'>ch0c01dxyz</Link></p>
-			<div>
-				<p className='text-blue-400'>http://localhost:3000/exampleimage</p>
+			<h1 className="text-2xl font-bold mb-2">{settings.site.Title}</h1>
+			<p className='text-sm text-muted-foreground mb-5'>{settings.site.Description}</p>
+
+			<div className="mb-8">
+				<p className='text-sm text-muted-foreground mb-2'>Preview embed:</p>
 				<DiscordEmbedViewer
 					author={{name: replace_dynamic_variables(settings.embed_data['Site Name'], FAKE_PLACEHOLDER_FILE_DATA, 1)}}
 					title={replace_dynamic_variables(settings.embed_data.Title, FAKE_PLACEHOLDER_FILE_DATA, 1)}
@@ -31,10 +27,14 @@ export default async function Home() {
 				/>
 			</div>
 
-			<Link href="/download" className="mt-5 flex items-center justify-center gap-2 text-blue-400 hover:text-blue-500">
+			<Link href="/download" className="flex items-center justify-center gap-2 text-blue-400 hover:text-blue-500">
 				<DownloadIcon />
 				<span>Download Configuration Files</span>
 			</Link>
+
+			{settings.site["Show Credits"] && (
+				<p className="text-xs text-muted-foreground fixed bottom-4 right-4">Made with ❤️ by <Link href="https://github.com/ch0c01dxyz" className='text-blue-400' target='_blank'>ch0c01dxyz</Link></p>
+			)}
 		</div>
 	)
 }
